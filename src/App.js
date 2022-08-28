@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Navbar } from "react-bootstrap";
-import { WorkoutModal } from "./components/WorkoutModal"
-import { Alert } from "../src/components/Alert";
+import { WorkoutModal, WorkoutList } from "../src/components";
 
 function App() {
 
@@ -13,8 +12,7 @@ function App() {
           <WorkoutModal />
         </Container>
       </Navbar>
-      <h1>Hello, world!</h1>
-      <Alert />
+      <WorkoutList />
     </>
   );
 }
