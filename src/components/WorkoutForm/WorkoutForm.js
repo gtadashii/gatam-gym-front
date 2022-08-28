@@ -1,47 +1,21 @@
-import React, { useState } from "react";
-import { Form, InputGroup, Button } from "react-bootstrap";
-import api from "../../service/api";
+import React from "react";
+import { Form, InputGroup } from "react-bootstrap";
 
-export function WorkoutForm() {
-  const [workoutName, setWorkoutName] = useState('');
+export function WorkoutForm({props}) {
   const muscleGroups = {};
-  const exercises = [];
 
-  const [exercise1, setExercise1] = useState({
-    name: "",
-    repetitions: "",
-  });
-
-  const [exercise2, setExercise2] = useState({
-    name: "",
-    repetitions: "",
-  });
-
-  const [exercise3, setExercise3] = useState({
-    name: "",
-    repetitions: "",
-  });
-
-  const [exercise4, setExercise4] = useState({
-    name: "",
-    repetitions: "",
-  });
-
-  function handleSubmit(){
-    !!exercise1.name && !!exercise1.repetitions && exercises.push(exercise1);
-    !!exercise2.name && !!exercise2.repetitions && exercises.push(exercise2);
-    !!exercise3.name && !!exercise3.repetitions && exercises.push(exercise3);
-    !!exercise4.name && !!exercise4.repetitions && exercises.push(exercise4);
-
-    api
-     .post("/workouts", {
-       name: workoutName,
-       exercises,
-     })
-     .catch((err) => {
-       console.error("ops! ocorreu um erro" + err);
-     });
- }
+  const {
+    workoutName,
+    setWorkoutName,
+    exercise1,
+    setExercise1,
+    exercise2,
+    setExercise2,
+    exercise3,
+    setExercise3,
+    exercise4,
+    setExercise4,
+   } = props;
 
   return (
     <>
@@ -94,6 +68,7 @@ export function WorkoutForm() {
             />
             <Form.Control
               placeholder="Repetições"
+              value={exercise1.repetitions}
               onChange={(e) => {
                 setExercise1({
                   ...exercise1,
@@ -105,6 +80,7 @@ export function WorkoutForm() {
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Nome do Exercício"
+              value={exercise2.name}
               onChange={(e) => {
                 setExercise2({
                   ...exercise2,
@@ -114,6 +90,7 @@ export function WorkoutForm() {
             />
             <Form.Control
               placeholder="Repetições"
+              value={exercise2.repetitions}
               onChange={(e) => {
                 setExercise2({
                   ...exercise2,
@@ -125,6 +102,7 @@ export function WorkoutForm() {
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Nome do Exercício"
+              value={exercise3.name}
               onChange={(e) => {
                 setExercise3({
                   ...exercise3,
@@ -134,6 +112,7 @@ export function WorkoutForm() {
             />
             <Form.Control
               placeholder="Repetições"
+              value={exercise3.repetitions}
               onChange={(e) => {
                 setExercise3({
                   ...exercise3,
@@ -145,6 +124,7 @@ export function WorkoutForm() {
           <InputGroup className="mb-3">
             <Form.Control
               placeholder="Nome do Exercício"
+              value={exercise4.name}
               onChange={(e) => {
                 setExercise4({
                   ...exercise4,
@@ -154,6 +134,7 @@ export function WorkoutForm() {
             />
             <Form.Control
               placeholder="Repetições"
+              value={exercise4.repetitions}
               onChange={(e) => {
                 setExercise4({
                   ...exercise4,
@@ -164,8 +145,6 @@ export function WorkoutForm() {
           </InputGroup>
         </Form.Group>
       </Form>
-
-      <Button onClick={handleSubmit}>TESTE API</Button>
     </>
   );
 }
