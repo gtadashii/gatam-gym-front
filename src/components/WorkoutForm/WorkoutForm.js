@@ -1,34 +1,47 @@
 import React, { useState } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup, Button } from "react-bootstrap";
+import api from "../../service/api";
 
 export function WorkoutForm() {
   const [workoutName, setWorkoutName] = useState('');
   const muscleGroups = {};
-  const exercises = {};
+  const exercises = [];
 
-  const [exercise1, setExercise1] = React.useState({
+  const [exercise1, setExercise1] = useState({
     name: "",
     repetitions: "",
   });
 
-  const [exercise2, setExercise2] = React.useState({
+  const [exercise2, setExercise2] = useState({
     name: "",
     repetitions: "",
   });
 
-  const [exercise3, setExercise3] = React.useState({
+  const [exercise3, setExercise3] = useState({
     name: "",
     repetitions: "",
   });
 
-  const [exercise4, setExercise4] = React.useState({
+  const [exercise4, setExercise4] = useState({
     name: "",
     repetitions: "",
   });
 
-  React.useEffect(() => {
-    console.log(muscleGroups);
-  }, [muscleGroups]);
+  function handleSubmit(){
+    !!exercise1.name && !!exercise1.repetitions && exercises.push(exercise1);
+    !!exercise2.name && !!exercise2.repetitions && exercises.push(exercise2);
+    !!exercise3.name && !!exercise3.repetitions && exercises.push(exercise3);
+    !!exercise4.name && !!exercise4.repetitions && exercises.push(exercise4);
+
+    api
+     .post("/workouts", {
+       name: workoutName,
+       exercises,
+     })
+     .catch((err) => {
+       console.error("ops! ocorreu um erro" + err);
+     });
+ }
 
   return (
     <>
@@ -151,6 +164,8 @@ export function WorkoutForm() {
           </InputGroup>
         </Form.Group>
       </Form>
+
+      <Button onClick={handleSubmit}>TESTE API</Button>
     </>
   );
 }
