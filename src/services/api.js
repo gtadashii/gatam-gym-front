@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://ajlgff9h51.execute-api.us-east-1.amazonaws.com/dev",
+  baseURL: "https://7g5fxxelh9.execute-api.us-east-1.amazonaws.com",
 });
 
 export default api;
