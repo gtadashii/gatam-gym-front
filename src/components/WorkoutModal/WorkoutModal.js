@@ -51,6 +51,23 @@ export function WorkoutModal(props) {
       });
   }
 
+  function handleUpdateWorkout(workoutId) {
+    !!exercise1.name && !!exercise1.repetitions && exercises.push(exercise1);
+    !!exercise2.name && !!exercise2.repetitions && exercises.push(exercise2);
+    !!exercise3.name && !!exercise3.repetitions && exercises.push(exercise3);
+    !!exercise4.name && !!exercise4.repetitions && exercises.push(exercise4);
+
+    api
+      .put(`/workouts/${workoutId}`, {
+        name: workoutName,
+        exercises,
+      })
+      .then(handleClose)
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+  }
+
   function handleGetWorkout(workoutId) {
     api
       .get(`/workouts/${workoutId}`)
@@ -121,7 +138,7 @@ export function WorkoutModal(props) {
             Cancelar
           </Button>
           {isEdit ? (
-            <Button variant="primary" onClick={handleSubmit}>
+            <Button variant="primary" onClick={() => handleUpdateWorkout(workoutId)}>
               Editar
             </Button>
           ) : (
