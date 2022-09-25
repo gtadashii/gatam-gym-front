@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { AiOutlineEdit } from "react-icons/ai";
 import { WorkoutForm } from "../WorkoutForm";
 import api from "../../services/api";
 
-export function WorkoutModal() {
+export function WorkoutModal(props) {
+  const {isEdit, workoutId} = props;
   const [isOpen, setIsOpen] = useState(false);
   let exercises = [];
   const emptyExercise = {
@@ -20,6 +22,7 @@ export function WorkoutModal() {
   const handleClose = () => {
     clearForm();
     setIsOpen(false);
+    window.location.reload();
   };
 
   function clearForm(){
@@ -48,11 +51,41 @@ export function WorkoutModal() {
       });
   }
 
+  function handleGetWorkout(workoutId) {
+    api
+      .get(`/workouts/${workoutId}`)
+      .then((res) => {
+        if (res.data) {
+          setWorkoutName(res.data.name);
+          setExercise1(res.data.exercises[0] || emptyExercise);
+          setExercise2(res.data.exercises[1] || emptyExercise);
+          setExercise3(res.data.exercises[2] || emptyExercise);
+          setExercise4(res.data.exercises[3] || emptyExercise);
+        }
+      })
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      });
+  }
+
+  useEffect(() => {
+    if (isEdit && !!workoutId) {
+      handleGetWorkout(workoutId);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEdit, workoutId]);
+
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        + Adicionar treino
-      </Button>
+      {isEdit ? (
+        <Button variant="secondary" onClick={handleShow}>
+          <AiOutlineEdit />
+        </Button>
+      ) : (
+        <Button variant="primary" onClick={handleShow}>
+          + Adicionar treino
+        </Button>
+      )}
 
       <Modal
         show={isOpen}
@@ -61,7 +94,11 @@ export function WorkoutModal() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Adicionar Treino</Modal.Title>
+          {isEdit ? (
+            <Modal.Title>Editar Treino</Modal.Title>
+          ) : (
+            <Modal.Title>Adicionar Treino</Modal.Title>
+          )}
         </Modal.Header>
         <Modal.Body>
           <WorkoutForm
@@ -83,9 +120,15 @@ export function WorkoutModal() {
           <Button variant="secondary" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Adicionar
-          </Button>
+          {isEdit ? (
+            <Button variant="primary" onClick={handleSubmit}>
+              Editar
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={handleSubmit}>
+              Adicionar
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>
