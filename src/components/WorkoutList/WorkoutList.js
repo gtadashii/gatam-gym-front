@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, ListGroup, Tab, Row } from "react-bootstrap";
+import { Col, ListGroup, Tab, Row, Button } from "react-bootstrap";
+import { AiOutlineDelete } from "react-icons/ai";
 import { WorkoutInfo } from "../WorkoutInfo"
+import { WorkoutModal } from "../WorkoutModal";
 import api from "../../services/api";
 
 export function WorkoutList() {
@@ -11,8 +13,6 @@ export function WorkoutList() {
       setWorkoutList(response.data);
     });
   }, []);
-
-  useEffect(() => {console.log(workoutList)}, [workoutList])
 
   if (!workoutList.length) return null;
 
@@ -25,7 +25,18 @@ export function WorkoutList() {
               <Col sm={4}>
                 <ListGroup>
                   <ListGroup.Item action href={`#link${index}`}>
-                    {workout.name}
+                    <div className="d-flex justify-content-between">
+                      {workout.name}
+                      <div className="d-flex justify-content-evenly">
+                        <WorkoutModal isEdit={true} workoutId={workout.id} />
+                        <Button
+                          variant="danger"
+                          onClick={() => console.log("delete")}
+                        >
+                          <AiOutlineDelete />
+                        </Button>
+                      </div>
+                    </div>
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
