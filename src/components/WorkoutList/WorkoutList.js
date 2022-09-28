@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Col, ListGroup, Tab, Row, Button } from "react-bootstrap";
-import { AiOutlineDelete } from "react-icons/ai";
+import { Col, ListGroup, Tab, Row } from "react-bootstrap";
+import { WorkoutDeletion } from "../WorkoutDeletion";
 import { WorkoutInfo } from "../WorkoutInfo"
 import { WorkoutModal } from "../WorkoutModal";
 import api from "../../services/api";
@@ -29,12 +29,7 @@ export function WorkoutList() {
                       {workout.name}
                       <div className="d-flex justify-content-evenly">
                         <WorkoutModal isEdit={true} workoutId={workout.id} />
-                        <Button
-                          variant="danger"
-                          onClick={() => console.log("delete")}
-                        >
-                          <AiOutlineDelete />
-                        </Button>
+                        <WorkoutDeletion workout={workout} />
                       </div>
                     </div>
                   </ListGroup.Item>
