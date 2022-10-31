@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import AuthContext from "../../context/AuthProvider"
 
 export function LoginForm(props) {
-  const { username, setUsername, password, setPassword, handleSubmit } = props;
+  const { loginInfo, setLoginInfo } = useContext(AuthContext);
+  const { handleSubmit } = props;
 
   return (
     <Container id="main-container" className="d-grid h-100">
@@ -16,8 +18,10 @@ export function LoginForm(props) {
               placeholder="Endereço de email"
               autoComplete="username"
               className="position-relative"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={loginInfo.username}
+              onChange={(e) =>
+                setLoginInfo({ ...loginInfo, username: e.target.value })
+              }
             />
           </Form.Group>
           <Form.Group className="m-3" controlId="sign-in-password">
@@ -27,8 +31,10 @@ export function LoginForm(props) {
               placeholder="Senha"
               autoComplete="current-password"
               className="position-relative"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={loginInfo.password}
+              onChange={(e) =>
+                setLoginInfo({ ...loginInfo, password: e.target.value })
+              }
             />
           </Form.Group>
         </div>

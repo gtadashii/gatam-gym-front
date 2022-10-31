@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { IoMdLogIn } from "react-icons/io";
 
 import { LoginForm } from "./LoginForm";
 import { SignUpForm } from "./SignUpForm";
+import AuthContext from "../../context/AuthProvider";
 
 export function AuthModal() {
+  const {
+    loginInfo,
+    clearLoginInfo,
+    signUpInfo,
+    clearSignUpInfo,
+  } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleShow = () => setIsOpen(true);
 
-  function clearForm() {
-    setName('');
-    setUsername('');
-    setPassword('');
-  }
-
   const handleClose = () => {
-    clearForm();
+    clearLoginInfo();
+    clearSignUpInfo();
     setIsOpen(false);
     window.location.reload();
   };
 
   const handleSubmit = () => {
-    isLogin ? console.log(username, password) : console.log(name, username, password)
+    isLogin ? console.log(loginInfo) : console.log(signUpInfo);
   };
 
   return (
@@ -40,23 +39,9 @@ export function AuthModal() {
       <Modal show={isOpen} onHide={handleClose} centered>
         <Modal.Body>
           {isLogin ? (
-            <LoginForm
-              username={username}
-              setUsername={setUsername}
-              password={password}
-              setPassword={setPassword}
-              handleSubmit={handleSubmit}
-            />
+            <LoginForm handleSubmit={handleSubmit} />
           ) : (
-            <SignUpForm
-              name={name}
-              setName={setName}
-              username={username}
-              setUsername={setUsername}
-              password={password}
-              setPassword={setPassword}
-              handleSubmit={handleSubmit}
-            />
+            <SignUpForm handleSubmit={handleSubmit} />
           )}
           <div className="d-flex justify-content-center">
             <Button variant="link" onClick={() => setIsLogin(!isLogin)}>

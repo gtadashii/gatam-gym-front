@@ -1,16 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import AuthContext from "../../context/AuthProvider";
 
 export function SignUpForm(props) {
-  const {
-    name,
-    setName,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    handleSubmit,
-  } = props;
+    const { signUpInfo, setSignUpInfo } = useContext(AuthContext);
+    const { handleSubmit } = props;
 
   return (
     <Container id="main-container" className="d-grid h-100">
@@ -24,8 +18,10 @@ export function SignUpForm(props) {
               placeholder="Nome"
               autoComplete="name"
               className="position-relative"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={signUpInfo.name}
+              onChange={(e) =>
+                setSignUpInfo({ ...signUpInfo, name: e.target.value })
+              }
             />
           </Form.Group>
           <Form.Group className="m-3" controlId="sign-up-email-address">
@@ -35,8 +31,10 @@ export function SignUpForm(props) {
               placeholder="Endereço de email"
               autoComplete="username"
               className="position-relative"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={signUpInfo.username}
+              onChange={(e) =>
+                setSignUpInfo({ ...signUpInfo, username: e.target.value })
+              }
             />
           </Form.Group>
           <Form.Group className="m-3" controlId="sign-up-password">
@@ -46,14 +44,16 @@ export function SignUpForm(props) {
               placeholder="Senha"
               autoComplete="current-password"
               className="position-relative"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={signUpInfo.password}
+              onChange={(e) =>
+                setSignUpInfo({ ...signUpInfo, password: e.target.value })
+              }
             />
           </Form.Group>
         </div>
         <div className="d-grid">
           <Button variant="primary" size="lg" onClick={handleSubmit}>
-            Entrar
+            Cadastrar
           </Button>
         </div>
       </Form>
