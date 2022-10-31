@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, ListGroup, Tab, Row } from "react-bootstrap";
 import { WorkoutDeletion } from "../WorkoutDeletion";
 import { WorkoutInfo } from "../WorkoutInfo"
 import { WorkoutModal } from "../WorkoutModal";
 import api from "../../services/api";
+import AuthContext from "../../context/AuthProvider";
 
 export function WorkoutList() {
   const [workoutList, setWorkoutList] = useState([]);
+  const { authHeader } = useContext(AuthContext);
 
   useEffect(() => {
-    api.get('/workouts').then((response) => {
+    api.get("/workouts", authHeader).then((response) => {
       setWorkoutList(response.data);
     });
   }, []);
@@ -21,7 +23,7 @@ export function WorkoutList() {
       <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
         {workoutList.length > 0 &&
           workoutList.map((workout, index) => (
-            <Row>
+            <Row key={index}>
               <Col sm={4}>
                 <ListGroup>
                   <ListGroup.Item action href={`#link${index}`}>
@@ -48,4 +50,4 @@ export function WorkoutList() {
       </Tab.Container>
     </>
   );
-};
+}

@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { Container, Navbar } from "react-bootstrap";
-import { WorkoutModal, WorkoutList } from "../src/components";
+import { CgGym } from "react-icons/cg";
+import { AuthModal, WorkoutModal, WorkoutList } from "../src/components";
+import AuthContext from "./context/AuthProvider";
 
 function App() {
+  const { logInResponse } = useContext(AuthContext);
+  const isLoggedIn = !!logInResponse.token;
 
   return (
     <>
-      <Navbar bg="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Sistema GATAM</Navbar.Brand>
-          <WorkoutModal />
+          <Navbar.Brand href="#home">
+            <CgGym />
+            {'\nSistema GATAM'}
+          </Navbar.Brand>
+          {isLoggedIn ? <WorkoutModal /> : <AuthModal />}
         </Container>
       </Navbar>
-      <WorkoutList />
+      {isLoggedIn && <WorkoutList />}
     </>
   );
 }
