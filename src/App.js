@@ -1,18 +1,24 @@
 import React from "react";
+
 import { Container, Navbar } from "react-bootstrap";
-import { WorkoutModal, WorkoutList } from "../src/components";
+import { CgGym } from "react-icons/cg";
+import { AuthModal, WorkoutModal, WorkoutList } from "../src/components";
 
 function App() {
+  const isLoggedIn = false;
 
   return (
     <>
-      <Navbar bg="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Sistema GATAM</Navbar.Brand>
-          <WorkoutModal />
+          <Navbar.Brand href="#home">
+            <CgGym />
+            {'\nSistema GATAM'}
+          </Navbar.Brand>
+          {isLoggedIn ? <WorkoutModal /> : <AuthModal />}
         </Container>
       </Navbar>
-      <WorkoutList />
+      {isLoggedIn && <WorkoutList />}
     </>
   );
 }
