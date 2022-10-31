@@ -17,9 +17,9 @@ export function LogInForm() {
               placeholder="Endereço de email"
               autoComplete="username"
               className="position-relative"
-              value={logInInfo.username}
+              value={logInInfo.email}
               onChange={(e) =>
-                setLogInInfo({ ...logInInfo, username: e.target.value })
+                setLogInInfo({ ...logInInfo, email: e.target.value })
               }
             />
           </Form.Group>

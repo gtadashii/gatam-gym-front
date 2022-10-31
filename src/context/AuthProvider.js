@@ -4,10 +4,10 @@ import api from "../services/api";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const initialLogInInfo = { username: '', password: '' };
+    const initialLogInInfo = { email: '', password: '' };
     const initialSignUpInfo = {
       name: '',
-      username: '',
+      email: '',
       password: '',
     };
 

@@ -28,11 +28,11 @@ export function SignUpForm() {
               type="email"
               size="lg"
               placeholder="Endereço de email"
-              autoComplete="username"
+              autoComplete="email"
               className="position-relative"
-              value={signUpInfo.username}
+              value={signUpInfo.email}
               onChange={(e) =>
-                setSignUpInfo({ ...signUpInfo, username: e.target.value })
+                setSignUpInfo({ ...signUpInfo, email: e.target.value })
               }
             />
           </Form.Group>
