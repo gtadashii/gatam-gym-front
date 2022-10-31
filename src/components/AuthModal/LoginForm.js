@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../../context/AuthProvider"
 
-export function LoginForm(props) {
-  const { loginInfo, setLoginInfo } = useContext(AuthContext);
-  const { handleSubmit } = props;
+export function LogInForm() {
+  const { logInInfo, setLogInInfo, handleLogIn } = useContext(AuthContext);
 
   return (
     <Container id="main-container" className="d-grid h-100">
@@ -18,9 +17,9 @@ export function LoginForm(props) {
               placeholder="Endereço de email"
               autoComplete="username"
               className="position-relative"
-              value={loginInfo.username}
+              value={logInInfo.username}
               onChange={(e) =>
-                setLoginInfo({ ...loginInfo, username: e.target.value })
+                setLogInInfo({ ...logInInfo, username: e.target.value })
               }
             />
           </Form.Group>
@@ -31,15 +30,15 @@ export function LoginForm(props) {
               placeholder="Senha"
               autoComplete="current-password"
               className="position-relative"
-              value={loginInfo.password}
+              value={logInInfo.password}
               onChange={(e) =>
-                setLoginInfo({ ...loginInfo, password: e.target.value })
+                setLogInInfo({ ...logInInfo, password: e.target.value })
               }
             />
           </Form.Group>
         </div>
         <div className="d-grid">
-          <Button variant="primary" size="lg" onClick={handleSubmit}>
+          <Button variant="primary" size="lg" onClick={handleLogIn}>
             Entrar
           </Button>
         </div>

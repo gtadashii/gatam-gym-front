@@ -2,31 +2,22 @@ import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { IoMdLogIn } from "react-icons/io";
 
-import { LoginForm } from "./LoginForm";
+import { LogInForm } from "./LogInForm";
 import { SignUpForm } from "./SignUpForm";
 import AuthContext from "../../context/AuthProvider";
 
 export function AuthModal() {
-  const {
-    loginInfo,
-    clearLoginInfo,
-    signUpInfo,
-    clearSignUpInfo,
-  } = useContext(AuthContext);
+  const { clearLogInInfo, clearSignUpInfo } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogIn, setIsLogIn] = useState(true);
 
   const handleShow = () => setIsOpen(true);
 
   const handleClose = () => {
-    clearLoginInfo();
+    clearLogInInfo();
     clearSignUpInfo();
     setIsOpen(false);
     window.location.reload();
-  };
-
-  const handleSubmit = () => {
-    isLogin ? console.log(loginInfo) : console.log(signUpInfo);
   };
 
   return (
@@ -38,14 +29,14 @@ export function AuthModal() {
 
       <Modal show={isOpen} onHide={handleClose} centered>
         <Modal.Body>
-          {isLogin ? (
-            <LoginForm handleSubmit={handleSubmit} />
+          {isLogIn ? (
+            <LogInForm />
           ) : (
-            <SignUpForm handleSubmit={handleSubmit} />
+            <SignUpForm />
           )}
           <div className="d-flex justify-content-center">
-            <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
-              {isLogin
+            <Button variant="link" onClick={() => setIsLogIn(!isLogIn)}>
+              {isLogIn
                 ? "Não tem cadastro? Clique aqui para se registrar!"
                 : "Já tem cadastro? Clique aqui para entrar!"}
             </Button>

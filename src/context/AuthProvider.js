@@ -3,35 +3,42 @@ import React, { createContext, useMemo, useState } from "react";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const initialLoginInfo = { username: '', password: '' };
+    const initialLogInInfo = { username: '', password: '' };
     const initialSignUpInfo = {
       name: '',
       username: '',
       password: '',
     };
 
-    const [loginInfo, setLoginInfo] = useState(initialLoginInfo);
+    const [logInInfo, setLogInInfo] = useState(initialLogInInfo);
     const [signUpInfo, setSignUpInfo] = useState(initialSignUpInfo);
 
-    const clearLoginInfo = () => setLoginInfo(initialLoginInfo);
+    const clearLogInInfo = () => setLogInInfo(initialLogInInfo);
     const clearSignUpInfo = () => setSignUpInfo(initialSignUpInfo);
+
+    const handleLogIn = () => console.log(logInInfo);
+    const handleSignUp = () => console.log(signUpInfo);
 
     const value = useMemo(
       () => ({
-        loginInfo,
-        setLoginInfo,
+        logInInfo,
+        setLogInInfo,
         signUpInfo,
         setSignUpInfo,
-        clearLoginInfo,
+        clearLogInInfo,
         clearSignUpInfo,
+        handleLogIn,
+        handleSignUp,
       }),
       [
-        loginInfo,
-        setLoginInfo,
+        logInInfo,
+        setLogInInfo,
         signUpInfo,
         setSignUpInfo,
-        clearLoginInfo,
+        clearLogInInfo,
         clearSignUpInfo,
+        handleLogIn,
+        handleSignUp,
       ]
     );
 

@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../../context/AuthProvider";
 
-export function SignUpForm(props) {
-    const { signUpInfo, setSignUpInfo } = useContext(AuthContext);
-    const { handleSubmit } = props;
+export function SignUpForm() {
+    const { signUpInfo, setSignUpInfo, handleSignUp } = useContext(AuthContext);
 
   return (
     <Container id="main-container" className="d-grid h-100">
@@ -52,7 +51,7 @@ export function SignUpForm(props) {
           </Form.Group>
         </div>
         <div className="d-grid">
-          <Button variant="primary" size="lg" onClick={handleSubmit}>
+          <Button variant="primary" size="lg" onClick={handleSignUp}>
             Cadastrar
           </Button>
         </div>
