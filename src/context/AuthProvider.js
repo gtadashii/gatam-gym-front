@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }) => {
     const clearLogInInfo = () => setLogInInfo(initialLogInInfo);
     const clearSignUpInfo = () => setSignUpInfo(initialSignUpInfo);
 
-    // TODO: check if {"Content-type": "application/json",} header is necessary
     const authHeader = {
       headers: {
         Authorization: `Bearer ${logInResponse.token}`,
