@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Container, Navbar } from "react-bootstrap";
 import { CgGym } from "react-icons/cg";
 import { AuthModal, WorkoutModal, WorkoutList } from "../src/components";
+import AuthContext from "./context/AuthProvider";
 
 function App() {
-  const isLoggedIn = false;
+  const { logInResponse } = useContext(AuthContext);
+  const isLoggedIn = !!logInResponse.token;
 
   return (
     <>

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
 import { WorkoutForm } from "../WorkoutForm";
 import api from "../../services/api";
+import AuthContext from "../../context/AuthProvider";
 
 export function WorkoutModal(props) {
   const {isEdit, workoutId} = props;
@@ -17,6 +18,7 @@ export function WorkoutModal(props) {
   const [exercise2, setExercise2] = useState(emptyExercise);
   const [exercise3, setExercise3] = useState(emptyExercise);
   const [exercise4, setExercise4] = useState(emptyExercise);
+  const { apiHeaderConfig } = useContext(AuthContext);
 
   const handleShow = () => setIsOpen(true);
   const handleClose = () => {
@@ -41,10 +43,14 @@ export function WorkoutModal(props) {
     !!exercise4.name && !!exercise4.repetitions && exercises.push(exercise4);
 
     api
-      .post("/workouts", {
-        name: workoutName,
-        exercises,
-      })
+      .post(
+        "/workouts",
+        {
+          name: workoutName,
+          exercises,
+        },
+        apiHeaderConfig
+      )
       .then(handleClose)
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);

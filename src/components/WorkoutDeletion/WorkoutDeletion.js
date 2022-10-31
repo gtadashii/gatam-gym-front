@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { AiOutlineDelete } from "react-icons/ai";
 import api from "../../services/api";
+import AuthContext from "../../context/AuthProvider";
 
 export function WorkoutDeletion(props) {
   const { workout } = props;
+  const { apiHeaderConfig } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleShow = () => setIsOpen(true);
@@ -12,10 +14,10 @@ export function WorkoutDeletion(props) {
 
   function handleWorkoutDeletion(workoutId) {
     api
-      .delete(`/workouts/${workoutId}`)
-      .then(() => { 
-        handleClose(); 
-        window.location.reload() 
+      .delete(`/workouts/${workoutId}`, apiHeaderConfig)
+      .then(() => {
+        handleClose();
+        window.location.reload();
       })
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);

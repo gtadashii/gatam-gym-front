@@ -3,7 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../../context/AuthProvider";
 
 export function SignUpForm() {
-    const { signUpInfo, setSignUpInfo, handleSignUp } = useContext(AuthContext);
+  const { signUpInfo, setSignUpInfo, handleSignUp } = useContext(AuthContext);
 
   return (
     <Container id="main-container" className="d-grid h-100">
