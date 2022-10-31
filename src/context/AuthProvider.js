@@ -22,16 +22,16 @@ export const AuthProvider = ({ children }) => {
     const clearLogInInfo = () => setLogInInfo(initialLogInInfo);
     const clearSignUpInfo = () => setSignUpInfo(initialSignUpInfo);
 
-    const apiHeaderConfig = {
+    // TODO: check if {"Content-type": "application/json",} header is necessary
+    const authHeader = {
       headers: {
-        "Content-type": "application/json",
         Authorization: `Bearer ${logInResponse.token}`,
       },
     };  
 
     const handleLogIn = () =>
       api
-        .post("/auth/login", logInInfo, apiHeaderConfig)
+        .post("/auth/login", logInInfo)
         .then((response) => setLogInResponse(response.data))
         .catch((err) => {
           console.error("ops! ocorreu um erro" + err);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
     const handleSignUp = () =>
       api
-        .post("/auth/register", signUpInfo, apiHeaderConfig)
+        .post("/auth/register", signUpInfo)
         .catch((err) => {
           console.error("ops! ocorreu um erro" + err);
         });
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
         handleLogIn,
         handleSignUp,
         logInResponse,
-        apiHeaderConfig
+        authHeader
       }),
       [
         logInInfo,
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         handleLogIn,
         handleSignUp,
         logInResponse,
-        apiHeaderConfig
+        authHeader
       ]
     );
 

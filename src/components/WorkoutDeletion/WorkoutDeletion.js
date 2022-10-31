@@ -6,7 +6,7 @@ import AuthContext from "../../context/AuthProvider";
 
 export function WorkoutDeletion(props) {
   const { workout } = props;
-  const { apiHeaderConfig } = useContext(AuthContext);
+  const { authHeader } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleShow = () => setIsOpen(true);
@@ -14,7 +14,7 @@ export function WorkoutDeletion(props) {
 
   function handleWorkoutDeletion(workoutId) {
     api
-      .delete(`/workouts/${workoutId}`, apiHeaderConfig)
+      .delete(`/workouts/${workoutId}`, authHeader)
       .then(() => {
         handleClose();
         window.location.reload();

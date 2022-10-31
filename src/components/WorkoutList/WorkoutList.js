@@ -8,10 +8,10 @@ import AuthContext from "../../context/AuthProvider";
 
 export function WorkoutList() {
   const [workoutList, setWorkoutList] = useState([]);
-  const { apiHeaderConfig } = useContext(AuthContext);
+  const { authHeader } = useContext(AuthContext);
 
   useEffect(() => {
-    api.get("/workouts", apiHeaderConfig).then((response) => {
+    api.get("/workouts", authHeader).then((response) => {
       setWorkoutList(response.data);
     });
   }, []);

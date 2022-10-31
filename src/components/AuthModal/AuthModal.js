@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { IoMdLogIn } from "react-icons/io";
+import { AiOutlineUserAdd } from "react-icons/ai";
 
 import { LogInForm } from "./LogInForm";
 import { SignUpForm } from "./SignUpForm";
@@ -23,7 +23,7 @@ export function AuthModal() {
   return (
     <>
       <Button variant="danger" onClick={handleShow}>
-        <IoMdLogIn />
+        <AiOutlineUserAdd />
         {"\nEntrar ou cadastrar"}
       </Button>
 

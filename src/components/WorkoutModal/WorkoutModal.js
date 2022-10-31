@@ -18,7 +18,7 @@ export function WorkoutModal(props) {
   const [exercise2, setExercise2] = useState(emptyExercise);
   const [exercise3, setExercise3] = useState(emptyExercise);
   const [exercise4, setExercise4] = useState(emptyExercise);
-  const { apiHeaderConfig } = useContext(AuthContext);
+  const { authHeader } = useContext(AuthContext);
 
   const handleShow = () => setIsOpen(true);
   const handleClose = () => {
@@ -49,7 +49,7 @@ export function WorkoutModal(props) {
           name: workoutName,
           exercises,
         },
-        apiHeaderConfig
+        authHeader
       )
       .then(handleClose)
       .catch((err) => {
