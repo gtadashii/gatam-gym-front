@@ -33,7 +33,7 @@ export function WorkoutDeletion(props) {
           <Modal.Title>Atenção!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Você confirma a exclusão do treino "{workout.name}"?
+          Você confirma a exclusão do treino `{workout.name}`?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -46,4 +46,4 @@ export function WorkoutDeletion(props) {
       </Modal>
     </>
   );
-};
+}

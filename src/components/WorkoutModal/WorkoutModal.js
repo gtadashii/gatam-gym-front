@@ -89,7 +89,6 @@ export function WorkoutModal(props) {
     if (isEdit && !!workoutId) {
       handleGetWorkout(workoutId);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, workoutId]);
 
   return (

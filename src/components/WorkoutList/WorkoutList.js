@@ -21,7 +21,7 @@ export function WorkoutList() {
       <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
         {workoutList.length > 0 &&
           workoutList.map((workout, index) => (
-            <Row>
+            <Row key={index}>
               <Col sm={4}>
                 <ListGroup>
                   <ListGroup.Item action href={`#link${index}`}>
@@ -48,4 +48,4 @@ export function WorkoutList() {
       </Tab.Container>
     </>
   );
-};
+}

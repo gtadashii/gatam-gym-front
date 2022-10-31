@@ -14,7 +14,7 @@ export function WorkoutInfo({workouts}) {
         </thead>
         <tbody>
           {workouts.map((workout, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>{workout.name}</td>
               <td>{workout.repetitions}</td>
